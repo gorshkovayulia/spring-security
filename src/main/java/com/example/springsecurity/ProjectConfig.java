@@ -1,13 +1,15 @@
 package com.example.springsecurity;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-public class ProjectConfig {
+public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
@@ -31,5 +33,12 @@ public class ProjectConfig {
     public PasswordEncoder passwordEncoder() {
         // NoOpPasswordEncoder is a good option when we don’t want to focus on the hashing algorithm of the password
         return NoOpPasswordEncoder.getInstance();
+    }
+
+    protected void configure(HttpSecurity http) throws Exception {
+        http.httpBasic();
+        // all the requests require authentication = same behavior as the default one
+        http.authorizeRequests()
+                .anyRequest().authenticated();
     }
 }
