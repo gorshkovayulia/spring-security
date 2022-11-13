@@ -4,26 +4,22 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
-public class ProjectConfig extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-
-        InMemoryUserDetailsManager userDetailsService = new InMemoryUserDetailsManager();
-
-        User user = (User) User.withUsername("john")
+        UserDetails user = User.withUsername("john")
                 .password("12345")
                 .authorities("read")
                 .build();
 
-        // add the user to be managed by UserDetailsService
-        userDetailsService.createUser(user);
-        return userDetailsService;
+        return new InMemoryUserDetailsManager(user);
     }
 
     /**
@@ -35,9 +31,9 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         return NoOpPasswordEncoder.getInstance();
     }
 
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.httpBasic();
-        // all the requests require authentication = same behavior as the default one
         http.authorizeRequests()
                 .anyRequest().authenticated();
     }
