@@ -6,29 +6,36 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.Collections;
 
-public class SimpleUser implements UserDetails {
+// The User class is immutable. We give the values for the three attributes when you build the instance, and these
+// values cannot be changed afterward
+public class User implements UserDetails {
 
     private final String username;
     private final String password;
+    private final String authority; // To make the example simple, a user has only one authority.
 
-    public SimpleUser(String username, String password) {
+    public User(String username, String password, String authority) {
         this.username = username;
         this.password = password;
-    }
-
-    @Override
-    public String getUsername() {
-        return this.username;
+        this.authority = authority;
     }
 
     @Override
     public String getPassword() {
-        return this.password;
+        return password;
     }
 
     @Override
+    public String getUsername() {
+        return username;
+    }
+
+    /**
+     * Returns a list containing only the GrantedAuthority object with the name provided when you built the instance
+     */
+    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.singletonList(() -> "READ");
+        return Collections.singletonList(() -> authority);
     }
 
     @Override
