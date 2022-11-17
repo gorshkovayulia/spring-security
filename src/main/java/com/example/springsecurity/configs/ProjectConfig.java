@@ -1,16 +1,12 @@
 package com.example.springsecurity.configs;
 
-import com.example.springsecurity.User;
-import com.example.springsecurity.services.InMemoryUserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-
-import java.util.Collections;
-import java.util.List;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import javax.sql.DataSource;
 
 /**
  * Configuration class for user and password management
@@ -18,10 +14,8 @@ import java.util.List;
 @Configuration
 public class ProjectConfig {
     @Bean
-    public UserDetailsService userDetailsService() {
-        UserDetails u = new User("john", "12345", "read");
-        List<UserDetails> users = Collections.singletonList(u);
-        return new InMemoryUserDetailsService(users);
+    public UserDetailsService userDetailsService(DataSource dataSource) {
+        return new JdbcUserDetailsManager(dataSource);
     }
 
     @Bean
