@@ -1,9 +1,2 @@
 server:
   port: 9091
-
-spring:
-  datasource:
-    url: jdbc:mysql://localhost:9091/test
-    username: "admin"
-    password: "admin"
-    initialization-mode: always
