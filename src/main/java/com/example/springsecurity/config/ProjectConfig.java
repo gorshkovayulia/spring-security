@@ -10,10 +10,7 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.httpBasic(c -> {
-            c.realmName("OTHER");// changing the realm name
-            c.authenticationEntryPoint(new CustomEntryPoint());
-        });
+        http.formLogin(); // use form-based login
         http.authorizeRequests()
                 .anyRequest()
                 .authenticated();
