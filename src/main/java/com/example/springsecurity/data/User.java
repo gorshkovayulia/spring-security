@@ -32,4 +32,8 @@ public class User {
     public List<Authority> getAuthorities() {
         return authorities;
     }
+
+    public EncryptionAlgorithm getAlgorithm() {
+        return algorithm;
+    }
 }
