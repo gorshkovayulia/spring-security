@@ -1,29 +1,20 @@
 package com.example.springsecurity.config;
 
-import com.example.springsecurity.handlers.CustomAuthenticationFailureHandler;
-import com.example.springsecurity.handlers.CustomAuthenticationSuccessHandler;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 
 @Configuration
-public class ProjectConfig extends WebSecurityConfigurerAdapter {
+public class ProjectConfig {
 
-    @Autowired
-    private CustomAuthenticationSuccessHandler authenticationSuccessHandler;
-    @Autowired
-    private CustomAuthenticationFailureHandler authenticationFailureHandler;
+    @Bean
+    public BCryptPasswordEncoder bCryptPasswordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin() // use form-based login
-                .successHandler(authenticationSuccessHandler)
-                .failureHandler(authenticationFailureHandler)
-                .and()
-                .httpBasic();
-        http.authorizeRequests()
-                .anyRequest()
-                .authenticated();
+    @Bean
+    public SCryptPasswordEncoder sCryptPasswordEncoder() {
+        return new SCryptPasswordEncoder();
     }
 }
