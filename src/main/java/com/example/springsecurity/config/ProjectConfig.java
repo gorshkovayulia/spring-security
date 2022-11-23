@@ -9,7 +9,8 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin(); // use form-based login
+        http.formLogin() // use form-based login
+                .defaultSuccessUrl("/home", true);
         http.authorizeRequests()
                 .anyRequest()
                 .authenticated();
