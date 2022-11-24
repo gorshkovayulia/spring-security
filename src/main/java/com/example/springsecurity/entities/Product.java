@@ -1,4 +1,4 @@
-package com.example.springsecurity.data;
+package com.example.springsecurity.entities;
 
 import javax.persistence.*;
 import java.util.Currency;
@@ -11,10 +11,8 @@ public class Product {
     private Integer id;
 
     private String name;
-
     private double price;
 
-    @Enumerated(EnumType.STRING)
+//    @Enumerated(EnumType.STRING)
     private Currency currency;
-
 }

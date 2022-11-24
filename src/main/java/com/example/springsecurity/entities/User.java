@@ -1,25 +1,29 @@
-package com.example.springsecurity.data;
+package com.example.springsecurity.entities;
 
-import com.example.springsecurity.EncryptionAlgorithm;
+import com.example.springsecurity.entities.enums.EncryptionAlgorithm;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Table(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     private String username;
-
     private String password;
 
     @Enumerated(EnumType.STRING)
     private EncryptionAlgorithm algorithm;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "userr", fetch = FetchType.EAGER)
     private List<Authority> authorities;
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getUsername() {
         return username;
@@ -29,11 +33,11 @@ public class User {
         return password;
     }
 
-    public List<Authority> getAuthorities() {
-        return authorities;
-    }
-
     public EncryptionAlgorithm getAlgorithm() {
         return algorithm;
+    }
+
+    public List<Authority> getAuthorities() {
+        return authorities;
     }
 }

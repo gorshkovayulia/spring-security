@@ -1,6 +1,6 @@
-package com.example.springsecurity;
+package com.example.springsecurity.model;
 
-import com.example.springsecurity.data.User;
+import com.example.springsecurity.entities.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,4 +1,4 @@
-package com.example.springsecurity;
+package com.example.springsecurity.entities.enums;
 
 /**
  * Defines the two supported hashing algorithms

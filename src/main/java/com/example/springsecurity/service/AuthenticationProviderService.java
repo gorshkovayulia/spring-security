@@ -1,6 +1,6 @@
 package com.example.springsecurity.service;
 
-import com.example.springsecurity.CustomUserDetails;
+import com.example.springsecurity.model.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,7 +10,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AuthenticationProviderService implements AuthenticationProvider {
 
     @Autowired
@@ -38,17 +40,13 @@ public class AuthenticationProviderService implements AuthenticationProvider {
     }
 
     @Override
-    public boolean supports(Class<?> authentication) {
-        return UsernamePasswordAuthenticationToken.class
-                .isAssignableFrom(authentication);
+    public boolean supports(Class<?> aClass) {
+        return UsernamePasswordAuthenticationToken.class.isAssignableFrom(aClass);
     }
 
     private Authentication checkPassword(CustomUserDetails user, String rawPassword, PasswordEncoder encoder) {
         if (encoder.matches(rawPassword, user.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(
-                    user.getUsername(),
-                    user.getPassword(),
-                    user.getAuthorities());
+            return new UsernamePasswordAuthenticationToken(user.getUsername(), user.getPassword(), user.getAuthorities());
         } else {
             throw new BadCredentialsException("Bad credentials");
         }

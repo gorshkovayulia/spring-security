@@ -1,4 +1,4 @@
-package com.example.springsecurity;
+package com.example.springsecurity.entities.enums;
 
 /**
  * Declares the types allowed as currencies in the application

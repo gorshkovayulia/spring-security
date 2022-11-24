@@ -1,4 +1,4 @@
-package com.example.springsecurity.data;
+package com.example.springsecurity.entities;
 
 import javax.persistence.*;
 
@@ -14,6 +14,10 @@ public class Authority {
     @JoinColumn(name = "user")
     @ManyToOne
     private User user;
+
+    public Integer getId() {
+        return id;
+    }
 
     public String getName() {
         return name;
