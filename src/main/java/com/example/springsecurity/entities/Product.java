@@ -13,6 +13,13 @@ public class Product {
     private String name;
     private double price;
 
-//    @Enumerated(EnumType.STRING)
     private Currency currency;
+
+    public String getName() {
+        return name;
+    }
+
+    public double getPrice() {
+        return price;
+    }
 }

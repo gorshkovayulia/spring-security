@@ -21,10 +21,6 @@ public class Person {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     private List<Authority> authorities;
 
-    public Integer getId() {
-        return id;
-    }
-
     public String getUsername() {
         return username;
     }

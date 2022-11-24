@@ -15,10 +15,6 @@ public class Authority {
     @ManyToOne
     private Person user;
 
-    public Integer getId() {
-        return id;
-    }
-
     public String getName() {
         return name;
     }
