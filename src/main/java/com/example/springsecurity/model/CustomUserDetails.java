@@ -1,6 +1,6 @@
 package com.example.springsecurity.model;
 
-import com.example.springsecurity.entities.User;
+import com.example.springsecurity.entities.Person;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,31 +9,31 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 public class CustomUserDetails implements UserDetails {
-    private final User user;
+    private final Person person;
 
-    public CustomUserDetails(User user) {
-        this.user = user;
+    public CustomUserDetails(Person person) {
+        this.person = person;
     }
 
-    public User getUser() {
-        return user;
+    public Person getUser() {
+        return person;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return user.getAuthorities().stream()
+        return person.getAuthorities().stream()
                 .map(a -> new SimpleGrantedAuthority(a.getName()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return person.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return person.getUsername();
     }
 
     @Override

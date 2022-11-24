@@ -1,7 +1,7 @@
 package com.example.springsecurity.service;
 
 import com.example.springsecurity.model.CustomUserDetails;
-import com.example.springsecurity.entities.User;
+import com.example.springsecurity.entities.Person;
 import com.example.springsecurity.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -20,7 +20,7 @@ public class JpaUserDetailsService implements UserDetailsService {
     public CustomUserDetails loadUserByUsername(String username) {
         Supplier<UsernameNotFoundException> s = () -> new UsernameNotFoundException("Problem during authentication!");
 
-        User user = userRepository
+        Person user = userRepository
                 .findUserByUsername(username)
                 .orElseThrow(s);
 

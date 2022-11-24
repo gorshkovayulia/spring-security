@@ -13,7 +13,7 @@ public class Authority {
 
     @JoinColumn(name = "person")
     @ManyToOne
-    private User user;
+    private Person user;
 
     public Integer getId() {
         return id;
