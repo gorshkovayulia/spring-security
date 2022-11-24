@@ -11,7 +11,7 @@ public class Authority {
 
     private String name;
 
-    @JoinColumn(name = "user")
+    @JoinColumn(name = "person")
     @ManyToOne
     private User user;
 
