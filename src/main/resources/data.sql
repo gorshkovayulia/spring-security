@@ -8,10 +8,7 @@ INSERT INTO authority (id, name, person)
 VALUES ('1','READ', '1');
 
 INSERT INTO authority (id, name, person)
-VALUES ('2','WRITE', '1');
-
-INSERT INTO authority (id, name, person)
-VALUES ('3','READ', '2');
+VALUES ('2','WRITE', '2');
 
 INSERT INTO product (id, name, price, currency)
 VALUES ('1', 'Chocolate', '10', 'USD');
