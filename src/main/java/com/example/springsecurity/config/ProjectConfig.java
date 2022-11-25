@@ -36,6 +36,6 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.formLogin()
                 .defaultSuccessUrl("/main", true);
-        http.authorizeRequests().anyRequest().access("hasAuthority('WRITE')");
+        http.authorizeRequests().anyRequest().hasRole("ANALYST");
     }
 }
