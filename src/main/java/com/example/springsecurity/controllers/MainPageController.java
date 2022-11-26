@@ -3,11 +3,11 @@ package com.example.springsecurity.controllers;
 import com.example.springsecurity.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 public class MainPageController {
 
     @Autowired
@@ -19,5 +19,15 @@ public class MainPageController {
         model.addAttribute("products", productService.findAll());
 
         return "main.html";
+    }
+
+    @GetMapping("/ciao")
+    public String ciao() {
+        return "Ciao!";
+    }
+
+    @GetMapping("/hola")
+    public String hola() {
+        return "Hola!";
     }
 }
