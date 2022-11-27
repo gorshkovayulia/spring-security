@@ -44,12 +44,8 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         http.formLogin();
 
         http.authorizeRequests()
-                .mvcMatchers(HttpMethod.GET, "/a")
-                .authenticated()
-                .mvcMatchers(HttpMethod.POST, "/a")
-                .permitAll()
-                .anyRequest()
-                .denyAll(); // denies any other request to any other path
+                .mvcMatchers("/a/b/**").authenticated() // the /a/b/** expression refers to all paths  prefixed with /a/b
+                .anyRequest().denyAll(); // denies any other request to any other path
 
         http.csrf().disable(); // disables CSRF to enable a call to the /a path using the HTTP POST method
     }
