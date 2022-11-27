@@ -20,11 +20,11 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
         UserDetails user1 = User.withUsername("john")
                 .password("12345")
-                .roles("ADMIN")
+                .authorities("read")
                 .build();
         UserDetails user2 = User.withUsername("jane")
                 .password("12345")
-                .roles("MANAGER")
+                .authorities("read", "premium")
                 .build();
 
         manager.createUser(user1);
@@ -43,7 +43,9 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         http.formLogin();
 
         http.authorizeRequests()
-                .mvcMatchers( "/hello")
-                .authenticated();
+                // match the  paths for which the user only  needs to be authenticated -->
+                .regexMatchers(".*/(us|uk|ca)+/(en|fr).*").authenticated()
+                // configures the other paths for which the user needs to have premium access
+                .anyRequest().hasAuthority("premium");
     }
 }
