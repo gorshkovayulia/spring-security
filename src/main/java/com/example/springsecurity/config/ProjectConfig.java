@@ -2,7 +2,6 @@ package com.example.springsecurity.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.User;
@@ -44,9 +43,7 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
         http.formLogin();
 
         http.authorizeRequests()
-                .mvcMatchers("/a/b/**").authenticated() // the /a/b/** expression refers to all paths  prefixed with /a/b
-                .anyRequest().denyAll(); // denies any other request to any other path
-
-        http.csrf().disable(); // disables CSRF to enable a call to the /a path using the HTTP POST method
+                .mvcMatchers( "/hello")
+                .authenticated();
     }
 }
