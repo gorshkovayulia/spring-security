@@ -1,2 +1,9 @@
 server:
   port: 9091
+
+spring:
+  security:
+    oauth2:
+      client:
+        registration.github.client-id: b9660a23f74bee506af3
+        registration.github.client-secret: d217c3996734c94ade24f9c3e1201be508ebeb3a
