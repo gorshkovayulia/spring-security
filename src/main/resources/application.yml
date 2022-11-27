@@ -5,5 +5,5 @@ spring:
   security:
     oauth2:
       client:
-        registration.github.client-id: b9660a23f74bee506af3
-        registration.github.client-secret: d217c3996734c94ade24f9c3e1201be508ebeb3a
+        registration.github.client-id: b8f9a943f6a2204016a3
+        registration.github.client-secret: 0f544dd65b705bfee8748d8687e461fc31e9440e
