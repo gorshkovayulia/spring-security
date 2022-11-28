@@ -1,5 +1,6 @@
 package com.example.springsecurity.config;
 
+import com.example.springsecurity.AuthenticationLoggingFilter;
 import com.example.springsecurity.RequestValidationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -43,6 +44,7 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class)
+                .addFilterAfter(new AuthenticationLoggingFilter(), BasicAuthenticationFilter.class)
                 .authorizeRequests()
                 .anyRequest().permitAll();
     }
