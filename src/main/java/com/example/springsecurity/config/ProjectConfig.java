@@ -1,5 +1,6 @@
 package com.example.springsecurity.config;
 
+import com.example.springsecurity.RequestValidationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -10,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 @Configuration
 public class ProjectConfig extends WebSecurityConfigurerAdapter {
@@ -40,12 +42,8 @@ public class ProjectConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.formLogin();
-
-        http.authorizeRequests()
-                // match the  paths for which the user only  needs to be authenticated -->
-                .regexMatchers(".*/(us|uk|ca)+/(en|fr).*").authenticated()
-                // configures the other paths for which the user needs to have premium access
-                .anyRequest().hasAuthority("premium");
+        http.addFilterBefore(new RequestValidationFilter(), BasicAuthenticationFilter.class)
+                .authorizeRequests()
+                .anyRequest().permitAll();
     }
 }
