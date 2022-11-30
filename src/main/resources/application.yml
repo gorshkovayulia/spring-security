@@ -1,6 +1,2 @@
 server:
   port: 9091
-
-# a value for the static key
-authorization:
-  key: SD9cICjl1e
