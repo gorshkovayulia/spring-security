@@ -1,17 +1,22 @@
 package com.example.springsecurity.controllers;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class HelloController {
 
-    @PostMapping("/hello") // path remains under CSRF protection
+    @GetMapping("/hello")
+    public String getHello() {
+        return "Get Hello!";
+    }
+
+    @PostMapping("/hello")
     public String postHello() {
         return "Post Hello!";
     }
-
-    @PostMapping("/ciao") // can be called without a CSRF token
+    @PostMapping("/ciao")
     public String postCiao() {
         return "Post Ciao";
     }
