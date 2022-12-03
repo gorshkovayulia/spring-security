@@ -1,7 +1,6 @@
 package com.example.springsecurity.controllers;
 
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -20,7 +19,6 @@ public class MainController {
 
     @PostMapping("/test")
     @ResponseBody
-    @CrossOrigin("http://localhost:9091")
     public String test() {
         logger.info("Test method called");
         return "HELLO";
