@@ -26,16 +26,10 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        InMemoryClientDetailsService service = new InMemoryClientDetailsService();
-
-        BaseClientDetails cd = new BaseClientDetails();
-        cd.setClientId("client");
-        cd.setClientSecret("secret");
-        cd.setScope(Collections.singletonList("read"));
-        cd.setAuthorizedGrantTypes(Collections.singletonList("password"));
-
-        service.setClientDetailsStore(Collections.singletonMap("client", cd));
-
-        clients.withClientDetails(service);
+        clients.inMemory()
+                .withClient("client")
+                .secret("secret")
+                .authorizedGrantTypes("password")
+                .scopes("read");
     }
 }
