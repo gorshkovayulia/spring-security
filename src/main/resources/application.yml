@@ -1,15 +1,9 @@
 server:
   port: 9091
 
-auth:
-  server:
-    base:
-      url: http://localhost:9091
-
-jwt:
-  signing:
-    key: ymLTU8rq83
-
 spring:
-  main:
-    allow-circular-references: true
+  security:
+    oauth2:
+      client:
+        registration.github.client-id: b8f9a943f6a2204016a3
+        registration.github.client-secret: 0f544dd65b705bfee8748d8687e461fc31e9440e
