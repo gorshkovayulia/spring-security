@@ -1,19 +1,15 @@
 server:
   port: 9091
 
+auth:
+  server:
+    base:
+      url: http://localhost:9091
+
+jwt:
+  signing:
+    key: ymLTU8rq83
+
 spring:
   main:
     allow-circular-references: true
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: pa
-  jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
-    # use schema.sql instead Hibernate schema (that creates based on defined Entities)
-    hibernate:
-      ddl-auto: none
-  h2:
-    console:
-      enabled: true
