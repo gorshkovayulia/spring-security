@@ -22,17 +22,8 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         clients.inMemory()
                 .withClient("client")
                 .secret("secret")
-                .authorizedGrantTypes("authorization_code")
-                .scopes("read")
-                // This is the URI to which the authorization server redirects the user once it completes authentication
-                .redirectUris("http://localhost:9091/home")
-                .and()
-
-                .withClient("client2")
-                .secret("secret2")
-                .authorizedGrantTypes("authorization_code", "password", "refresh_token")
-                .scopes("read")
-                .redirectUris("http://localhost:9091/home");
+                .authorizedGrantTypes("client_credentials")
+                .scopes("info");
     }
 
     @Override
