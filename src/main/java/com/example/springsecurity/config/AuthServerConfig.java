@@ -22,11 +22,18 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("client")
-                .secret("secret")
+                .withClient("client1")
+                .secret("secret1")
                 .authorizedGrantTypes("authorization_code")
                 .scopes("read")
                 // This is the URI to which the authorization server redirects the user once it completes authentication
+                .redirectUris("http://localhost:9090/home")
+                .and()
+
+                .withClient("client2")
+                .secret("secret2")
+                .authorizedGrantTypes("authorization_code", "password", "refresh_token")
+                .scopes("read")
                 .redirectUris("http://localhost:9090/home");
     }
 
