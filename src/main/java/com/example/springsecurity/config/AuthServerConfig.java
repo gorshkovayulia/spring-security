@@ -20,16 +20,18 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     private AuthenticationManager authenticationManager;
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
-        endpoints.authenticationManager(authenticationManager);
-    }
-
-    @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
                 .withClient("client")
                 .secret("secret")
-                .authorizedGrantTypes("password")
-                .scopes("read");
+                .authorizedGrantTypes("authorization_code")
+                .scopes("read")
+                // This is the URI to which the authorization server redirects the user once it completes authentication
+                .redirectUris("http://localhost:9090/home");
+    }
+
+    @Override
+    public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
+        endpoints.authenticationManager(authenticationManager);
     }
 }
