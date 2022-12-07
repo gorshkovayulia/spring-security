@@ -7,8 +7,6 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.provider.client.BaseClientDetails;
-import org.springframework.security.oauth2.provider.client.InMemoryClientDetailsService;
 
 import java.util.Collections;
 
@@ -22,19 +20,19 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("client1")
-                .secret("secret1")
+                .withClient("client")
+                .secret("secret")
                 .authorizedGrantTypes("authorization_code")
                 .scopes("read")
                 // This is the URI to which the authorization server redirects the user once it completes authentication
-                .redirectUris("http://localhost:9090/home")
+                .redirectUris("http://localhost:9091/home")
                 .and()
 
                 .withClient("client2")
                 .secret("secret2")
                 .authorizedGrantTypes("authorization_code", "password", "refresh_token")
                 .scopes("read")
-                .redirectUris("http://localhost:9090/home");
+                .redirectUris("http://localhost:9091/home");
     }
 
     @Override
