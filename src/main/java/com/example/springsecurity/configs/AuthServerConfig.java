@@ -1,4 +1,4 @@
-package com.example.springsecurity.config;
+package com.example.springsecurity.configs;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -7,8 +7,7 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-
-import java.util.Collections;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 
 @Configuration
 @EnableAuthorizationServer // instruct Spring Boot to enable the configuration specific to the OAuth 2 authorization server
@@ -23,11 +22,19 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                 .withClient("client")
                 .secret("secret")
                 .authorizedGrantTypes("password", "refresh_token")
-                .scopes("read");
+                .scopes("read")
+                .and()
+
+                .withClient("resourceserver")
+                .secret("resourceserversecret");
     }
 
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) {
         endpoints.authenticationManager(authenticationManager);
+    }
+
+    public void configure(AuthorizationServerSecurityConfigurer security) {
+        security.checkTokenAccess("isAuthenticated()");
     }
 }
