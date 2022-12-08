@@ -25,6 +25,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                 .scopes("read")
                 .and()
 
+                // register a resource server client
                 .withClient("resourceserver")
                 .secret("resourceserversecret");
     }
@@ -34,7 +35,9 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
         endpoints.authenticationManager(authenticationManager);
     }
 
+    // To allow authenticated requests to call the /oauth/check_token endpoint
     public void configure(AuthorizationServerSecurityConfigurer security) {
+        // Specify the condition for which we can call the check_token endpoint
         security.checkTokenAccess("isAuthenticated()");
     }
 }
