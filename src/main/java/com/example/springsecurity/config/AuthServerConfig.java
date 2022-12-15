@@ -38,7 +38,7 @@ public class AuthServerConfig extends AuthorizationServerConfigurerAdapter {
                 authenticationManager(authenticationManager).
                 // Configures the token store and the access token converter objects
                 tokenStore(tokenStore())
-                .accessTokenConverter(jwtAccessTokenConverter());;
+                .accessTokenConverter(jwtAccessTokenConverter());
     }
 
     @Bean
