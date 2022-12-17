@@ -14,7 +14,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    @Value("${jwt.key}")
+    @Value("${jwt.key}") // Injects the key value from the application.yml file
     private String jwtKey;
 
     @Override
@@ -22,11 +22,13 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         resources.tokenStore(tokenStore());
     }
 
+    // Declares the TokenStore and adds it to the Spring context
     @Bean
     public TokenStore tokenStore() {
         return new JwtTokenStore(jwtAccessTokenConverter());
     }
 
+    // Creates an access token converter and sets the symmetric key used to validate token signatures
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
