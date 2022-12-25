@@ -1,4 +1,2 @@
 server:
   port: 9091
-
-publicKey: -----BEGIN PUBLIC KEY-----MIIBIjANBghk…-----END PUBLIC KEY-----
